@@ -40,6 +40,26 @@ try_set_default_device(gpu(0))
 
   python .\simplenet.py
 
+
+
+############################ 
+
+from cntk.device import try_set_default_device
+cntk.try_set_default_device(cntk.device.cpu())
+
+
+from cntk.device import try_set_default_device, gpu
+try_set_default_device(gpu(0))
+
+import cntk.device
+cntk.all_devices()
+(GPU[0] Quadro K420, CPU)
+
+ cntk.device.cpu()
+CPU
+ cntk.device.gpu(0)
+GPU[0] Quadro K420
+
 """
 
 
@@ -49,6 +69,12 @@ import cntk as C
 from cntk.learners import sgd
 from cntk.logging import ProgressPrinter
 from cntk.layers import Dense, Sequential
+
+# CPU selector 
+C.try_set_default_device(C.device.cpu())
+
+# GPU selector 
+#C.try_set_default_device(C.device.gpu(0))
 
 def generate_random_data(sample_size, feature_dim, num_classes):
      # Create synthetic data using NumPy.
@@ -108,10 +134,9 @@ def ffnet():
 
 np.random.seed(98052)
 ffnet()
-
-
 """
-PS C:\Users\abhanand\Documents> python .\simplenet.py
+abhanand@AAHP MINGW64 ~/Documents/azml
+$ python simplenet.py
 Selected GPU[0] Quadro K420 as the process wide default device.
 -------------------------------------------------------------------
 Build info:
@@ -144,4 +169,6 @@ Learning rate per minibatch: 0.125
      0.28      0.228     0.0964     0.0775         12775
     0.248      0.215     0.0874     0.0784         25575
  error rate on an unseen minibatch: 0.0
- """
+
+abhanand@AAHP MINGW64 ~/Documents/azml
+"""
